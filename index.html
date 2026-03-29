@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio 🎀</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --pink-light: #fce4ec;
+      --pink-mid:   #f8bbd0;
+      --pink-main:  #e91e8c;
+      --pink-deep:  #c2185b;
+      --pink-soft:  #fdf0f5;
+      --pink-blush: #fff0f6;
+      --bow:        #f48fb1;
+      --text-dark:  #3b1a2e;
+      --text-mid:   #7b3f63;
+      --white:      #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--pink-deep) !important;
+      font-size: 1.4rem;
+    }
+    .nav-link {
+      color: var(--text-mid) !important;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .nav-link:hover { color: var(--pink-main) !important; }
+
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #fff0f6 0%, #fce4ec 50%, #fdf0f5 100%);
+      z-index: 1;
+    }
+
+
+    .bow-icon { font-size: 2.4rem; }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      color: var(--text-dark);
+      line-height: 1.1;
+    }
+    .hero-name span { color: var(--pink-main); font-style: italic; }
+    .hero-tagline {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--text-mid);
+      font-style: italic;
+      margin-top: .5rem;
+    }
+    .hero-dream {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--pink-main), var(--pink-deep));
+      color: #fff;
+      padding: .35rem 1.1rem;
+      border-radius: 50px;
+      font-size: .85rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      margin-top: .8rem;
+    }
+    .btn-pink {
+      background: linear-gradient(135deg, var(--pink-main), var(--pink-deep));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: .6rem 1.8rem;
+      font-weight: 500;
+      font-size: .9rem;
+      text-decoration: none;
+    }
+    .btn-outline-pink {
+      background: transparent;
+      color: var(--pink-main);
+      border: 2px solid var(--pink-main);
+      border-radius: 50px;
+      padding: .55rem 1.6rem;
+      font-weight: 500;
+      font-size: .9rem;
+      text-decoration: none;
+    }
+    .hero-avatar {
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink-mid), var(--bow));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 7rem;
+      box-shadow: 0 16px 48px #f48fb166;
+      border: 6px solid #fff;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--text-dark);
+    }
+    .section-title span { color: var(--pink-main); font-style: italic; }
+    .section-divider { display: none; }
+    .card-pink {
+      background: rgba(255,255,255,0.85);
+      border: 1.5px solid var(--pink-mid);
+      border-radius: 20px;
+      padding: 1.6rem;
+      backdrop-filter: blur(8px);
+    }
+
+    #about { padding: 6rem 0; position: relative; z-index: 1; }
+    #techstack { padding: 5rem 0; position: relative; z-index: 1; background: linear-gradient(180deg, transparent, #fce4ec44, transparent); }
+    #projects { padding: 5rem 0; position: relative; z-index: 1; }
+    #certifications { padding: 5rem 0; position: relative; z-index: 1; }
+    #affiliations { padding: 5rem 0; position: relative; z-index: 1; background: linear-gradient(180deg, transparent, #fce4ec33, transparent); }
+    #contact { padding: 5rem 0; position: relative; z-index: 1; }
+    .tech-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: #fff;
+      border: 1.5px solid var(--pink-mid);
+      color: var(--text-dark);
+      border-radius: 50px;
+      padding: .45rem 1.1rem;
+      font-size: .85rem;
+      font-weight: 500;
+      margin: .35rem;
+    }
+    .tech-badge i { font-size: 1rem; }
+
+    .empty-projects {
+      text-align: center;
+      padding: 3rem;
+      border: 2px dashed var(--pink-mid);
+      border-radius: 20px;
+      color: var(--text-mid);
+    }
+    .empty-projects .big-icon { font-size: 3.5rem; }
+    .cert-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 16px #f48fb122;
+    }
+    .cert-badge-icon {
+      width: 46px; height: 46px;
+      background: linear-gradient(135deg, var(--pink-light), var(--pink-mid));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .affil-card {
+      text-align: center;
+      background: #fff;
+      border: 1.5px solid var(--pink-mid);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+    }
+    .affil-icon {
+      width: 60px; height: 60px;
+      background: linear-gradient(135deg, var(--pink-light), var(--pink-mid));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.8rem;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      padding: 1rem 1.4rem;
+      background: #fff;
+      border: 1.5px solid var(--pink-mid);
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      margin-bottom: .75rem;
+    }
+    .contact-link:hover { background: #fff; color: var(--text-dark); border-color: var(--pink-mid); }
+    .contact-link i { font-size: 1.3rem; color: var(--pink-main); }
+
+    footer {
+      background: transparent;
+      color: var(--text-mid);
+      text-align: center;
+      padding: 2rem;
+      font-size: .85rem;
+      position: relative; z-index: 1;
+    }
+    footer span { color: var(--pink-main); }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">✿ Sheena Mae</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <i class="bi bi-list" style="color:var(--pink-main);font-size:1.5rem"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-1">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#techstack">Tech Stack</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#certifications">Certs</a></li>
+        <li class="nav-item"><a class="nav-link" href="#affiliations">Affiliations</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="container py-5">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <p class="hero-dream">✦ aspiring UI/UX Designer</p>
+        <h1 class="hero-name mt-2">Hi, I'm <span>Sheena Mae</span> 👋</h1>
+        <p class="hero-tagline mt-3">"turning coffee and code into something beautiful, one bug at a time ☕"</p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a href="#about" class="btn-pink">get to know me 🌸</a>
+          <a href="#contact" class="btn-outline-pink">let's connect ✉️</a>
+        </div>
+      </div>
+      <div class="col-lg-5 text-center">
+        <div class="mt-3">
+          <span class="tech-badge"><i class="bi bi-star-fill" style="color:var(--pink-main)"></i> IT Student</span>
+          <span class="tech-badge"><i class="bi bi-heart-fill" style="color:var(--pink-main)"></i> Tech Enthusiast</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <div class="section-title">a little about <span>me</span> 🌷</div>
+        <div class="section-divider mx-auto"></div>
+      </div>
+    </div>
+    <div class="row g-4 mt-2">
+      <div class="col-md-4">
+        <div class="card-pink h-100 text-center">
+          <div style="font-size:2.5rem;margin-bottom:.8rem">🎓</div>
+          <h5 style="font-family:'Playfair Display',serif;color:var(--pink-deep)">Student</h5>
+          <p class="mb-0" style="font-size:.9rem;color:var(--text-mid)">Currently studying Information Technology and loving every bit of it (even the hard parts hehe).</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-pink h-100 text-center">
+          <div style="font-size:2.5rem;margin-bottom:.8rem">💻</div>
+          <h5 style="font-family:'Playfair Display',serif;color:var(--pink-deep)">Dream Job</h5>
+          <p class="mb-0" style="font-size:.9rem;color:var(--text-mid)">My dream is to become a <strong>UI/UX Designer</strong> creating interfaces that are not just functional but genuinely beautiful and easy to use ✨</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-pink h-100 text-center">
+          <div style="font-size:2.5rem;margin-bottom:.8rem">🌸</div>
+          <h5 style="font-family:'Playfair Display',serif;color:var(--pink-deep)">About Me</h5>
+          <p class="mb-0" style="font-size:.9rem;color:var(--text-mid)">I'm a detail-oriented and curious person who enjoys learning new things. Outside of tech, I love moon, photography, iced coffee, and aesthetic setups.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-lg-10 mx-auto">
+        <div class="card-pink">
+          <h5 style="font-family:'Playfair Display',serif;color:var(--pink-deep)" class="mb-3">📖 my story</h5>
+          <p style="color:var(--text-mid);line-height:1.8;font-size:.95rem">
+            Wassup! I'm <strong>Sheena Mae V. Martin</strong>, a passionate IT student with a love for all things tech and design. I got into IT because I was always the person in my family who had to fix the Wi-Fi (classic, right?), but along the way I discovered my genuine passion for UI/UX design and how beautiful, user-friendly interfaces can make a real difference.
+          </p>
+          <p style="color:var(--text-mid);line-height:1.8;font-size:.95rem;margin-bottom:0">
+            I'm currently working on myself and learning new stuff, but I feel fairly comfortable with HTML and CSS. I enjoy eating, watching TV shows and movies, and composing poems, also I love photography this is all I do when I'm not coding. 🌷
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="techstack">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <div class="section-title">my <span>tech stack</span> 🛠️</div>
+        <div class="section-divider mx-auto"></div>
+        <p style="color:var(--text-mid);font-size:.95rem">tools & technologies i've been learning and using!</p>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 text-center" id="techBadges"></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <div class="section-title">my <span>projects</span> 💾</div>
+        <div class="section-divider mx-auto"></div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12">
+        <div class="empty-projects">
+          <div class="big-icon">💳</div>
+          <h5 class="mt-3" style="font-family:'Playfair Display',serif;color:var(--pink-deep)">ATM: EASEBANK</h5>
+          <p style="color:var(--text-mid);font-size:.9rem;margin-bottom:0">We developed a system that functions as an ATM. We came up with this concept because some ATMs aren't updated or advanced, thus our system is more sophisticated. For this project, we used Java and C#.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications" style="background:linear-gradient(180deg,transparent,#fce4ec33,transparent)">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <div class="section-title">webinars & <span>certifications</span> 📜</div>
+        <div class="section-divider mx-auto"></div>
+        <p style="color:var(--text-mid);font-size:.95rem">trainings and programs i've attended!</p>
+      </div>
+    </div>
+    <div class="row mt-3" id="certsContainer"></div>
+  </div>
+</section>
+
+<section id="affiliations">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <div class="section-title">my <span>affiliations</span> 🤝</div>
+        <div class="section-divider mx-auto"></div>
+        <p style="color:var(--text-mid);font-size:.95rem">organizations and groups i'm part of!</p>
+      </div>
+    </div>
+    <div class="row g-4 mt-2" id="affilContainer"></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 text-center">
+        <div class="section-title">let's <span>connect</span> 💌</div>
+        <div class="section-divider mx-auto"></div>
+        <p style="color:var(--text-mid);font-size:.95rem">feel free to reach out anytime! i don't bite hehe 🌸</p>
+      </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+      <div class="col-md-7" id="contactLinks"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="mb-0">made with <span>♥</span> and a lot of iced coffee ☕</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const techStack = [
+    { name: "HTML5", icon: "bi-filetype-html" },
+    { name: "CSS3", icon: "bi-filetype-css" },
+    { name: "JavaScript", icon: "bi-filetype-js" },
+    { name: "Bootstrap", icon: "bi-bootstrap-fill" },
+    { name: "Figma", icon: "bi-vector-pen" },
+    { name: "VS Code", icon: "bi-code-slash" },
+    { name: "GitHub", icon: "bi-github" },
+    { name: "Canva", icon: "bi-palette-fill" },
+  ];
+
+  const certifications = [
+    {
+      title: "Bridging Knowledge: Exploring Digital Divide, Cybersecurity and OS Trends",
+      icon: "🌐",
+      desc: "A webinar tackling the digital divide, current trends in cybersecurity, and operating systems in today's tech landscape. This webinar was provided by STI COLLEGE MALOLOS."
+    },
+    {
+      title: "Ethical Hacking using EC-Council's Certified Ethical Hacker (CEH) Curriculum",
+      icon: "💡",
+      desc: "A training program focused on ethical hacking principles and techniques based on the EC-Council's Certified Ethical Hacker (CEH) curriculum, designed to equip students with knowledge of cybersecurity and ethical hacking practices."
+    },
+    {
+      title: "Manulife Insurance Company Career Orientation Program",
+      icon: "🎯",
+      desc: "A career orientation program by Manulife Insurance Company designed to guide students in exploring career paths and opportunities in the professional world."
+    },
+    {
+      title: "SD, MM, PP, FI, CO Modules of S/4HANA using Global Bike",
+      icon: "⚙️",
+      desc: "Hands-on training on SAP S/4HANA modules — Sales & Distribution, Materials Management, Production Planning, Financial Accounting, and Controlling — using the Global Bike case study."
+    },
+  ];
+
+  const affiliations = [
+    { name: "SYNTAX", emoji: "🎀", desc: "Member of the previous SYNTAX organization." },
+    { name: "FRX", emoji: "🌸", desc: "Member of the previous FRX organization." },
+    { name: "BLAZE ORG", emoji: "✨", desc: "Member of the newly created organization which is BLAZE ORG." },
+  ];
+
+  const contacts = [
+    { icon: "bi-envelope-fill", label: "Email", value: "shnamaemrtn@gmail.com", href: "mailto:shnamaemrtn@gmail.com" },
+    { icon: "bi-linkedin", label: "LinkedIn", value: "linkedin.com/in/sheenamae-martin", href: "https://ph.linkedin.com/in/sheena-mae-v-martin-7b5b52374" },
+    { icon: "bi-github", label: "GitHub", value: "github.com/sheenamae18", href: "https://github.com/sheenamae18" },
+    { icon: "bi-facebook", label: "Facebook", value: "facebook.com/sheena.maeeee", href: "https://www.facebook.com/sheena.maeeee" },
+    { icon: "bi-tiktok", label: "Tiktok", value: "@user444smv", href: "https://www.tiktok.com/@user444smv?_r=1&_t=ZS-950w2PrWMrf" },
+    { icon: "bi-phone-fill", label: "Phone", value: "+63 966 341 2966", href: "tel:+639663412966" },
+  ];
+
+  const techContainer = document.getElementById("techBadges");
+  techStack.forEach(t => {
+    techContainer.innerHTML += `<span class="tech-badge"><i class="bi ${t.icon}" style="color:var(--pink-main)"></i>${t.name}</span>`;
+  });
+
+  const certsContainer = document.getElementById("certsContainer");
+  certifications.forEach(c => {
+    certsContainer.innerHTML += `
+      <div class="col-md-6 mb-3">
+        <div class="cert-card d-flex align-items-start gap-3">
+          <div class="cert-badge-icon">${c.icon}</div>
+          <div>
+            <h6 style="font-family:'Playfair Display',serif;color:var(--text-dark);margin-bottom:.3rem">${c.title}</h6>
+            <p style="font-size:.83rem;color:var(--text-mid);margin:0">${c.desc}</p>
+          </div>
+        </div>
+      </div>`;
+  });
+
+  const affilContainer = document.getElementById("affilContainer");
+  affiliations.forEach(a => {
+    affilContainer.innerHTML += `
+      <div class="col-md-4">
+        <div class="affil-card">
+          <div class="affil-icon">${a.emoji}</div>
+          <h5 style="font-family:'Playfair Display',serif;color:var(--text-dark)">${a.name}</h5>
+          <p style="font-size:.85rem;color:var(--text-mid);margin:0">${a.desc}</p>
+        </div>
+      </div>`;
+  });
+
+  const contactLinks = document.getElementById("contactLinks");
+  contacts.forEach(c => {
+    contactLinks.innerHTML += `
+      <a href="${c.href}" target="_blank" class="contact-link">
+        <i class="bi ${c.icon}"></i>
+        <div>
+          <div style="font-size:.78rem;color:var(--text-mid);letter-spacing:.05em">${c.label}</div>
+          <div>${c.value}</div>
+        </div>
+        <i class="bi bi-arrow-right ms-auto" style="font-size:.9rem;opacity:.5"></i>
+      </a>`;
+  });
+</script>
+</body>
+</html>
